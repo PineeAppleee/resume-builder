@@ -68,13 +68,28 @@ interface ResumeContextType {
     updateSection: (section: keyof ResumeData, data: any) => void;
     saveResume: () => Promise<void>;
     loading: boolean;
+    isGuest: boolean;
 }
 
 const ResumeContext = createContext<ResumeContextType | undefined>(undefined);
 
-export function ResumeProvider({ children, initialData }: { children: React.ReactNode, initialData?: ResumeData }) {
+const GUEST_RESUME_KEY = 'guest_resume_data';
+
+export function ResumeProvider({ children, initialData, isGuest = false }: { children: React.ReactNode, initialData?: ResumeData, isGuest?: boolean }) {
     const [resumeData, setResumeData] = useState<ResumeData>(() => {
+        if (isGuest && typeof window !== 'undefined') {
+            const saved = localStorage.getItem(GUEST_RESUME_KEY);
+            if (saved) {
+                try {
+                    return { ...initialResumeState, ...JSON.parse(saved) };
+                } catch (e) {
+                    console.error("Failed to load guest data", e);
+                }
+            }
+        }
+
         if (!initialData) return initialResumeState;
+
         return {
             ...initialResumeState,
             ...initialData,
@@ -92,12 +107,27 @@ export function ResumeProvider({ children, initialData }: { children: React.Reac
     const router = useRouter();
 
     const updateSection = (section: keyof ResumeData, data: any) => {
-        setResumeData((prev) => ({ ...prev, [section]: data }));
+        setResumeData((prev) => {
+            const newData = { ...prev, [section]: data };
+            if (isGuest) {
+                localStorage.setItem(GUEST_RESUME_KEY, JSON.stringify(newData));
+            }
+            return newData;
+        });
     };
 
     const saveResume = async () => {
         setLoading(true);
         try {
+            if (isGuest) {
+                // In guest mode, 'save' just persists to local storage (already done on update, but maybe show success)
+                localStorage.setItem(GUEST_RESUME_KEY, JSON.stringify(resumeData));
+                // Simulate network delay
+                await new Promise(resolve => setTimeout(resolve, 500));
+                // Maybe redirect to a specific 'guest' view or just stay
+                return;
+            }
+
             const method = resumeData._id ? 'PUT' : 'POST';
             const url = resumeData._id ? `/api/resumes/${resumeData._id}` : '/api/resumes';
 
@@ -122,7 +152,7 @@ export function ResumeProvider({ children, initialData }: { children: React.Reac
     };
 
     return (
-        <ResumeContext.Provider value={{ resumeData, setResumeData, updateSection, saveResume, loading }}>
+        <ResumeContext.Provider value={{ resumeData, setResumeData, updateSection, saveResume, loading, isGuest }}>
             {children}
         </ResumeContext.Provider>
     );

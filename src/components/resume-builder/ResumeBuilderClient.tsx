@@ -22,7 +22,7 @@ const steps = [
 
 export default function ResumeBuilderClient() {
     const [currentStep, setCurrentStep] = useState(0);
-    const { saveResume, loading, resumeData, updateSection } = useResume();
+    const { saveResume, loading, resumeData, updateSection, isGuest } = useResume();
 
     const handleNext = () => {
         if (currentStep < steps.length - 1) {
@@ -66,43 +66,49 @@ export default function ResumeBuilderClient() {
                         </Button>
                     </div>
                 </div>
-
-                {/* Form Content */}
-                <div className="flex-1 overflow-y-auto p-6 lg:p-10">
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={currentStep}
-                            initial={{ opacity: 0, x: 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -20 }}
-                            transition={{ duration: 0.3 }}
-                        >
-                            <StepComponent />
-                        </motion.div>
-                    </AnimatePresence>
-                </div>
-
-                {/* Navigation Actions */}
-                <div className="p-4 border-t border-border flex justify-between bg-background">
-                    <Button
-                        variant="ghost"
-                        onClick={handlePrev}
-                        disabled={currentStep === 0}
-                    >
-                        <ArrowLeft className="w-4 h-4 mr-2" /> Back
-                    </Button>
-                    <Button onClick={handleNext} disabled={currentStep === steps.length - 1}>
-                        Next <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
-                </div>
+                {useResume().isGuest && (
+                    <div className="absolute top-16 left-0 w-full bg-yellow-100 text-yellow-800 text-xs px-4 py-1 text-center font-medium flex justify-center items-center gap-2 animate-in fade-in slide-in-from-top-2">
+                        ⚠️ Guest Mode: Changes saved locally. <a href="/signup" className="underline font-bold hover:text-yellow-900">Sign up to save permanently.</a>
+                    </div>
+                )}
             </div>
 
-            {/* Right: Live Preview */}
-            <div className="hidden lg:block w-1/2 h-full bg-secondary/50 p-8 overflow-y-auto">
-                <div className="max-w-[210mm] mx-auto bg-white shadow-2xl min-h-[297mm]">
-                    <ResumePreview />
-                </div>
+            {/* Form Content */}
+            <div className="flex-1 overflow-y-auto p-6 lg:p-10">
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        key={currentStep}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        <StepComponent />
+                    </motion.div>
+                </AnimatePresence>
+            </div>
+
+            {/* Navigation Actions */}
+            <div className="p-4 border-t border-border flex justify-between bg-background">
+                <Button
+                    variant="ghost"
+                    onClick={handlePrev}
+                    disabled={currentStep === 0}
+                >
+                    <ArrowLeft className="w-4 h-4 mr-2" /> Back
+                </Button>
+                <Button onClick={handleNext} disabled={currentStep === steps.length - 1}>
+                    Next <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
             </div>
         </div>
+
+            {/* Right: Live Preview */ }
+    <div className="hidden lg:block w-1/2 h-full bg-secondary/50 p-8 overflow-y-auto">
+        <div className="max-w-[210mm] mx-auto bg-white shadow-2xl min-h-[297mm]">
+            <ResumePreview />
+        </div>
+    </div>
+        </div >
     );
 }
