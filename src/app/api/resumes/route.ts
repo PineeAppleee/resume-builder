@@ -17,6 +17,11 @@ export async function POST(req: Request) {
         delete body._id;
 
         const resume = await Resume.create({
+            personalInfo: {},
+            education: [],
+            skills: [],
+            projects: [],
+            experience: [],
             ...body,
             userId: session.userId,
         });
