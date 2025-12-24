@@ -22,7 +22,7 @@ const steps = [
 
 export default function ResumeBuilderClient() {
     const [currentStep, setCurrentStep] = useState(0);
-    const { saveResume, loading } = useResume();
+    const { saveResume, loading, resumeData, updateSection } = useResume();
 
     const handleNext = () => {
         if (currentStep < steps.length - 1) {
@@ -53,8 +53,8 @@ export default function ResumeBuilderClient() {
                         <span className="text-sm font-medium text-muted-foreground hidden xl:inline">Template:</span>
                         <select
                             className="text-sm border border-input rounded-md px-2 py-1 bg-background focus:ring-1 focus:ring-ring"
-                            value={useResume().resumeData.template || 'professional'}
-                            onChange={(e) => useResume().updateSection('template', e.target.value)}
+                            value={resumeData.template || 'professional'}
+                            onChange={(e) => updateSection('template', e.target.value)}
                         >
                             <option value="professional">Professional</option>
                             <option value="modern">Modern</option>
