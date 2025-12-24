@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
-import { useResume } from './ResumeContext';
+import { useState, useEffect } from 'react';
+import { useResume } from '@/components/resume-builder/ResumeContext';
+import { useRouter, useSearchParams } from 'next/navigation';
 import OnboardingForm from './forms/OnboardingForm';
 import PersonalForm from './forms/PersonalForm';
 import EducationForm from './forms/EducationForm';
@@ -26,6 +27,15 @@ const steps = [
 export default function ResumeBuilderClient() {
     const [currentStep, setCurrentStep] = useState(0);
     const { saveResume, loading, resumeData, updateSection, isGuest } = useResume();
+    const searchParams = useSearchParams();
+
+    // Initialize template from URL if present
+    useEffect(() => {
+        const templateParam = searchParams.get('template');
+        if (templateParam && resumeData.template !== templateParam) {
+            updateSection('template', templateParam);
+        }
+    }, [searchParams, resumeData.template, updateSection]);
 
     const handleNext = () => {
         if (currentStep < steps.length - 1) {
@@ -62,6 +72,8 @@ export default function ResumeBuilderClient() {
                             <option value="professional">Professional</option>
                             <option value="modern">Modern</option>
                             <option value="minimal">Minimal</option>
+                            <option value="tech">Tech (DevStream)</option>
+                            <option value="creative">Creative (Studio)</option>
                         </select>
                         <Button variant="outline" size="sm" onClick={saveResume} disabled={loading}>
                             <Save className="w-4 h-4 mr-2" />
