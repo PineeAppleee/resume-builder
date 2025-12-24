@@ -73,7 +73,21 @@ interface ResumeContextType {
 const ResumeContext = createContext<ResumeContextType | undefined>(undefined);
 
 export function ResumeProvider({ children, initialData }: { children: React.ReactNode, initialData?: ResumeData }) {
-    const [resumeData, setResumeData] = useState<ResumeData>(initialData || initialResumeState);
+    const [resumeData, setResumeData] = useState<ResumeData>(() => {
+        if (!initialData) return initialResumeState;
+        return {
+            ...initialResumeState,
+            ...initialData,
+            personalInfo: {
+                ...initialResumeState.personalInfo,
+                ...(initialData.personalInfo || {}),
+            },
+            education: initialData.education || [],
+            skills: initialData.skills || [],
+            projects: initialData.projects || [],
+            experience: initialData.experience || [],
+        };
+    });
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
