@@ -94,5 +94,5 @@ export const authOptions: NextAuthOptions = {
     session: {
         strategy: 'jwt',
     },
-    secret: process.env.JWT_SECRET, // Reusing existing secret
+    secret: process.env.NEXTAUTH_SECRET,
 };
