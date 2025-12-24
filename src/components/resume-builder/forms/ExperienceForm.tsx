@@ -44,19 +44,30 @@ export default function ExperienceForm() {
         );
     };
 
-    // Mock AI enhancement
+    // Real AI enhancement
     const enhanceDescription = async (id: string, currentText: string) => {
         if (!currentText) return;
         setEnhancingId(id);
 
-        // Simulate AI delay
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        try {
+            const res = await fetch('/api/ai/improve', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: currentText, section: 'experience' }),
+            });
 
-        // Mock response
-        const enhancedText = currentText + "\n• Improved with measurable metrics\n• demonstrated leadership\n• Optimized performance by 20%";
+            if (!res.ok) throw new Error('AI request failed');
 
-        updateExperience(id, 'description', enhancedText);
-        setEnhancingId(null);
+            const data = await res.json();
+            if (data.improvedText) {
+                updateExperience(id, 'description', data.improvedText);
+            }
+        } catch (error) {
+            console.error(error);
+            // Optionally add toast notification here
+        } finally {
+            setEnhancingId(null);
+        }
     };
 
     return (
