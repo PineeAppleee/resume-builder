@@ -70,7 +70,7 @@ export default function LandingPage() {
               Track your job applications and land your next role faster.
             </motion.p>
             <motion.div variants={itemVariants} className="flex gap-4 justify-center pt-4">
-              <Link href="/signup">
+              <Link href="/resume-builder/new">
                 <Button size="lg" className="rounded-full h-12 px-8 text-base">
                   Start Building Now <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
