@@ -40,6 +40,7 @@ export type ResumeData = {
     }>;
     aiSummary: string;
     themeColor: string;
+    template: string;
 };
 
 const initialResumeState: ResumeData = {
@@ -58,6 +59,7 @@ const initialResumeState: ResumeData = {
     experience: [],
     aiSummary: '',
     themeColor: '#000000',
+    template: 'professional',
 };
 
 interface ResumeContextType {

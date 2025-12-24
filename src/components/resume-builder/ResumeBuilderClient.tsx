@@ -49,10 +49,22 @@ export default function ResumeBuilderClient() {
                         <span className="font-semibold">{steps[currentStep].title}</span>
                         <span className="text-muted-foreground text-sm ml-2">Step {currentStep + 1} of {steps.length}</span>
                     </div>
-                    <Button variant="outline" size="sm" onClick={saveResume} disabled={loading}>
-                        <Save className="w-4 h-4 mr-2" />
-                        {loading ? 'Saving...' : 'Save'}
-                    </Button>
+                    <div className="flex items-center gap-2">
+                        <span className="text-sm font-medium text-muted-foreground hidden xl:inline">Template:</span>
+                        <select
+                            className="text-sm border border-input rounded-md px-2 py-1 bg-background focus:ring-1 focus:ring-ring"
+                            value={useResume().resumeData.template || 'professional'}
+                            onChange={(e) => useResume().updateSection('template', e.target.value)}
+                        >
+                            <option value="professional">Professional</option>
+                            <option value="modern">Modern</option>
+                            <option value="minimal">Minimal</option>
+                        </select>
+                        <Button variant="outline" size="sm" onClick={saveResume} disabled={loading}>
+                            <Save className="w-4 h-4 mr-2" />
+                            {loading ? 'Saving...' : 'Save'}
+                        </Button>
+                    </div>
                 </div>
 
                 {/* Form Content */}
