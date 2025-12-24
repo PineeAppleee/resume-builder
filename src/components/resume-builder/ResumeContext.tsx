@@ -41,6 +41,9 @@ export type ResumeData = {
     aiSummary: string;
     themeColor: string;
     template: string;
+    targetRole?: string;
+    experienceLevel?: 'fresher' | 'mid' | 'senior';
+    isGuest: boolean;
 };
 
 const initialResumeState: ResumeData = {
@@ -60,6 +63,9 @@ const initialResumeState: ResumeData = {
     aiSummary: '',
     themeColor: '#000000',
     template: 'professional',
+    targetRole: '',
+    experienceLevel: 'mid',
+    isGuest: false,
 };
 
 interface ResumeContextType {

@@ -54,6 +54,15 @@ const ResumeSchema = new mongoose.Schema({
         type: String,
         default: 'modern',
     },
+    targetRole: {
+        type: String,
+        default: '',
+    },
+    experienceLevel: {
+        type: String,
+        enum: ['fresher', 'mid', 'senior'],
+        default: 'mid',
+    },
     createdAt: {
         type: Date,
         default: Date.now,

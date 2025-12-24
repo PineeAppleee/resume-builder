@@ -2,17 +2,20 @@
 
 import { useState } from 'react';
 import { useResume } from './ResumeContext';
+import OnboardingForm from './forms/OnboardingForm';
 import PersonalForm from './forms/PersonalForm';
 import EducationForm from './forms/EducationForm';
 import SkillsForm from './forms/SkillsForm';
 import ProjectsForm from './forms/ProjectsForm';
 import ExperienceForm from './forms/ExperienceForm';
 import ResumePreview from './ResumePreview';
+import MentorPanel from '@/components/mentor/MentorPanel';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, ArrowRight, Save, LayoutTemplate } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const steps = [
+    { id: 'onboarding', title: 'Start', component: OnboardingForm },
     { id: 'personal', title: 'Personal Info', component: PersonalForm },
     { id: 'education', title: 'Education', component: EducationForm },
     { id: 'skills', title: 'Skills', component: SkillsForm },
@@ -106,6 +109,8 @@ export default function ResumeBuilderClient() {
             <div className="hidden lg:block w-1/2 h-full bg-secondary/50 p-8 overflow-y-auto">
                 <div className="max-w-[210mm] mx-auto bg-white shadow-2xl min-h-[297mm]">
                     <ResumePreview />
+
+                    <MentorPanel currentStepName={steps[currentStep].title} />
                 </div>
             </div>
         </div >

@@ -33,7 +33,7 @@ export default function LandingPage() {
       <header className="px-6 lg:px-8 h-16 flex items-center justify-between border-b border-border/40 backdrop-blur-sm sticky top-0 z-50">
         <div className="flex items-center gap-2 font-bold text-xl">
           <Sparkles className="text-primary w-6 h-6" />
-          <span>ResumeCraft</span>
+          <span>ResumeMentor</span>
         </div>
         <nav className="flex items-center gap-4">
           <Link href="/login">
@@ -60,7 +60,7 @@ export default function LandingPage() {
               variants={itemVariants}
               className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight"
             >
-              Resume<span className="text-primary">Craft</span> - Free & AI Enhanced
+              Resume<span className="text-primary">Mentor</span> - AI Career Coach
             </motion.h1>
             <motion.p
               variants={itemVariants}
@@ -133,7 +133,7 @@ export default function LandingPage() {
       </main>
 
       <footer className="py-6 text-center text-sm text-muted-foreground border-t border-border">
-        © 2025 ResumeCraft. Free & Open Source.
+        © 2025 ResumeMentor. Free & Open Source.
       </footer>
     </div>
   );
