@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Resume Builder & Job Tracker
 
-## Getting Started
+A production-ready SaaS application for building professional resumes with AI assistance and tracking job applications in a Kanban board. Built with Next.js 14, Tailwind CSS, and MongoDB.
 
-First, run the development server:
+![Project Status](https://img.shields.io/badge/status-production--ready-success)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 📄 AI Resume Builder
+- **Multi-step Wizard**: Personal info, education, skills, projects, and experience.
+- **Live Preview**: See your resume update in real-time as you type.
+- **AI Enhancement**: Click "AI Enhance" to improve your job descriptions using mock AI (simulating professional rewrites).
+- **PDF Export**: Print-friendly layout designed for ATS compatibility.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 💼 Job Tracker Dashboard
+- **Kanban Board**: Drag-and-drop interface to manage applications.
+- **Status Tracking**: Applied, Interview, Offer, Rejected columns.
+- **Analytics**: Quick view of your application progress.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🔐 Authentication & Security
+- **Secure Auth**: JWT-based authentication with HTTP-only cookies.
+- **Middleware Protection**: Secure routes for dashboard and user data.
 
-## Learn More
+## 🛠 Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Frontend**: Next.js 14 (App Router), TypeScript, Tailwind CSS, Framer Motion, Shadcn/UI (Radix).
+- **Backend**: Next.js API Routes, Node.js.
+- **Database**: MongoDB (via Mongoose).
+- **State Management**: React Context + Hooks.
+- **DnD**: @hello-pangea/dnd for Kanban board.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🏁 Getting Started
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Prerequisites
+- Node.js 18+
+- MongoDB URI (Atlas or Local)
 
-## Deploy on Vercel
+### Installation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/ai-resume-builder.git
+   cd ai-resume-builder
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Configure Environment**
+   Create a `.env` file in the root directory:
+   ```env
+   MONGODB_URI=mongodb+srv://<user>:<password>@cluster.mongodb.net/resume_builder
+   JWT_SECRET=your_super_secret_key
+   NEXT_PUBLIC_APP_URL=http://localhost:3000
+   ```
+
+4. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+
+5. **Open the App**
+   Navigate to [http://localhost:3000](http://localhost:3000).
+
+## 📱 Screenshots
+
+(Screenshots would go here in a real repo)
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+This project is licensed under the MIT License.
