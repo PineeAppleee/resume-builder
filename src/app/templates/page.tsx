@@ -11,37 +11,82 @@ const templates = [
     {
         id: 'professional',
         name: 'Professional',
-        category: 'general',
         description: 'Clean, structured layout perfect for corporate roles.',
-        color: 'bg-slate-100',
+        category: 'Standard',
+        color: 'bg-gray-100',
+        image: '/templates/professional.png'
     },
     {
         id: 'modern',
         name: 'Modern',
-        category: 'general',
-        description: 'Bold header and stylish accents for varied fields.',
-        color: 'bg-primary/10',
+        description: 'Contemporary design with subtle accent colors.',
+        category: 'Standard',
+        color: 'bg-blue-50',
+        image: '/templates/modern.png'
     },
     {
         id: 'minimal',
         name: 'Minimal',
-        category: 'fresher',
-        description: 'Typography-focused, elegant and simple.',
-        color: 'bg-white border',
+        description: 'Distraction-free layout focusing on content.',
+        category: 'Standard',
+        color: 'bg-slate-50',
+        image: '/templates/minimal.png'
     },
     {
         id: 'tech',
         name: 'DevStream',
-        category: 'tech',
-        description: 'Monospaced, skill-focused layout for developers.',
-        color: 'bg-slate-900',
+        description: 'Monospaced font and code-like structure for developers.',
+        category: 'Tech & Engineering',
+        color: 'bg-zinc-900 text-white',
+        image: '/templates/tech.png'
     },
     {
         id: 'creative',
         name: 'Studio',
-        category: 'creative',
-        description: 'High-impact design for designers and marketers.',
-        color: 'bg-purple-100',
+        description: 'Bold typography and high-contrast design.',
+        category: 'Creative',
+        color: 'bg-purple-50',
+        image: '/templates/creative.png'
+    },
+    {
+        id: 'executive',
+        name: 'Executive',
+        description: 'Authoritative, serif-based design for leadership roles.',
+        category: 'Standard',
+        color: 'bg-neutral-100',
+        image: '/templates/executive.png'
+    },
+    {
+        id: 'startup',
+        name: 'Startup',
+        description: 'Modern, vibrant, and impact-focused.',
+        category: 'Tech & Engineering',
+        color: 'bg-indigo-50',
+        image: '/templates/startup.png'
+    },
+    {
+        id: 'academic',
+        name: 'Academic',
+        description: 'Dense, scholarly layout for CVs and research.',
+        category: 'Standard',
+        color: 'bg-white border',
+        image: '/templates/academic.png'
+    },
+    {
+        id: 'compact',
+        name: 'Compact',
+        description: 'Optimized single-page layout for dense careers.',
+        category: 'Standard',
+        color: 'bg-stone-50',
+        image: '/templates/compact.png'
+    },
+    {
+        id: 'designer',
+        name: 'Designer',
+        description: 'Two-column layout with visual flair.',
+        category: 'Creative',
+        color: 'bg-yellow-50',
+        image: '/templates/designer.png'
     }
 ];
 

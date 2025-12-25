@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
 
 export default function ExperienceForm() {
-    const { resumeData, updateSection } = useResume();
+    const { resumeData, updateSection, setActiveItemId } = useResume();
     const { experience } = resumeData;
     const [enhancingId, setEnhancingId] = useState<string | null>(null);
 
@@ -73,13 +73,21 @@ export default function ExperienceForm() {
     return (
         <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {experience.map((exp, index) => (
-                <div key={exp.id} className="p-4 border border-border rounded-lg space-y-4">
+                <div
+                    key={exp.id}
+                    className="p-4 border border-border rounded-lg space-y-4 focus-within:border-primary/50 transition-colors"
+                    onClick={() => setActiveItemId(exp.id)}
+                    onFocus={() => setActiveItemId(exp.id)}
+                >
                     <div className="flex justify-between items-center">
                         <h3 className="font-medium">Experience #{index + 1}</h3>
                         <Button
                             variant="ghost"
                             size="icon"
-                            onClick={() => removeExperience(exp.id)}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                removeExperience(exp.id);
+                            }}
                             className="text-destructive hover:text-destructive hover:bg-destructive/10"
                         >
                             <Trash2 className="h-4 w-4" />
@@ -122,16 +130,7 @@ export default function ExperienceForm() {
                     <div className="space-y-2">
                         <div className="flex justify-between items-center">
                             <Label>Description</Label>
-                            <Button
-                                variant="ghost"
-                                size="sm"
-                                className="text-primary h-6"
-                                onClick={() => enhanceDescription(exp.id, exp.description)}
-                                disabled={enhancingId === exp.id || !exp.description}
-                            >
-                                <Sparkles className={`mr-1 h-3 w-3 ${enhancingId === exp.id ? 'animate-pulse' : ''}`} />
-                                {enhancingId === exp.id ? 'Enhancing...' : 'AI Enhance'}
-                            </Button>
+                            {/* Legacy AI Enhance button kept for redundancy, but Sidebar is preferred */}
                         </div>
                         <Textarea
                             value={exp.description}

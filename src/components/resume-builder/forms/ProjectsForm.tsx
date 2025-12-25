@@ -9,8 +9,10 @@ import { Trash2, Plus } from 'lucide-react';
 import { v4 as uuidv4 } from 'uuid';
 
 export default function ProjectsForm() {
-    const { resumeData, updateSection } = useResume();
+    const { resumeData, updateSection, setActiveItemId } = useResume();
     const { projects } = resumeData;
+
+    // ... (rest of functions)
 
     const addProject = () => {
         updateSection('projects', [
@@ -44,7 +46,12 @@ export default function ProjectsForm() {
     return (
         <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {projects.map((proj, index) => (
-                <div key={proj.id} className="p-4 border border-border rounded-lg space-y-4">
+                <div
+                    key={proj.id}
+                    className="p-4 border border-border rounded-lg space-y-4 focus-within:border-primary/50 transition-colors"
+                    onClick={() => setActiveItemId(proj.id)}
+                    onFocus={() => setActiveItemId(proj.id)}
+                >
                     <div className="flex justify-between items-center">
                         <h3 className="font-medium">Project #{index + 1}</h3>
                         <Button

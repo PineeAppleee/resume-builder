@@ -105,30 +105,38 @@ button:active {
 }
 
 @media print {
-
-  header,
-  footer,
-  nav,
-  aside,
-  button,
-  .no-print {
-    display: none !important;
+  @page {
+    margin: 0;
+    size: auto;
   }
 
-  body {
-    background: white;
-    color: black;
+  body * {
+    visibility: hidden;
   }
 
-  .print-safe {
-    display: block !important;
-    width: 100% !important;
-    height: 100% !important;
+  #print-area,
+  #print-area * {
+    visibility: visible;
+  }
+
+  #print-area {
     position: absolute;
-    top: 0;
     left: 0;
+    top: 0;
+    width: 100%;
     margin: 0;
     padding: 0;
-    overflow: visible;
+    background: white;
+    z-index: 9999;
+  }
+
+  /* Ensure no backgrounds interfere */
+  body {
+    background: white;
+  }
+
+  /* Hide scrollbars */
+  ::-webkit-scrollbar {
+    display: none;
   }
 }

@@ -1,39 +1,18 @@
 'use client';
+
 import { motion, Variants } from 'framer-motion';
 import { ArrowRight, CheckCircle2, FileText, Sparkles, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
 export default function LandingPage() {
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: 'spring',
-        stiffness: 100,
-      },
-    },
-  };
-
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground overflow-x-hidden">
       {/* Navbar */}
       <header className="px-6 lg:px-8 h-16 flex items-center justify-between border-b border-border/40 backdrop-blur-sm sticky top-0 z-50">
-        <div className="flex items-center gap-2 font-bold text-xl">
-          <Sparkles className="text-primary w-6 h-6" />
-          <span>ResumeMentor</span>
+        <div className="flex items-center gap-2">
+          <Sparkles className="w-6 h-6 text-primary" />
+          <span className="font-bold text-xl tracking-tight">ResumeCanvas</span>
         </div>
         <nav className="flex items-center gap-4">
           <Link href="/login">
@@ -47,41 +26,38 @@ export default function LandingPage() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative py-20 lg:py-32 px-6 text-center max-w-5xl mx-auto">
-          <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-background to-background opacity-50 blur-3xl"></div>
+        <section className="relative py-20 lg:py-32 px-6">
+          <div className="max-w-4xl mx-auto text-center space-y-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight text-foreground mb-6 leading-tight">
+                Your Career Story, <br />
+                <span className="text-primary bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+                  AI-Architected.
+                </span>
+              </h1>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                Experience a **Gemini Canvas-style** workspace where AI writes, refines, and structures your resume in real-time.
+                Free forever. No hidden fees.
+              </p>
+            </motion.div>
 
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
-            className="space-y-6"
-          >
-            <motion.h1
-              variants={itemVariants}
-              className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight"
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center"
             >
-              Resume<span className="text-primary">Mentor</span> - AI Career Coach
-            </motion.h1>
-            <motion.p
-              variants={itemVariants}
-              className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto"
-            >
-              Create professional, ATS-friendly resumes in minutes using our AI-powered builder.
-              Track your job applications and land your next role faster.
-            </motion.p>
-            <motion.div variants={itemVariants} className="flex gap-4 justify-center pt-4">
               <Link href="/resume-builder/new">
-                <Button size="lg" className="rounded-full h-12 px-8 text-base">
-                  Start Building Now <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </Link>
-              <Link href="#features">
-                <Button variant="outline" size="lg" className="rounded-full h-12 px-8 text-base">
-                  Learn More
+                <Button size="lg" className="text-lg px-8 h-12 rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all">
+                  Open Canvas <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
             </motion.div>
-          </motion.div>
+          </div>
         </section>
 
         {/* Features Section */}
@@ -132,9 +108,9 @@ export default function LandingPage() {
         </section>
       </main>
 
-      <footer className="py-6 text-center text-sm text-muted-foreground border-t border-border">
-        © 2025 ResumeMentor. Free & Open Source.
-      </footer>
+      <div className="text-center text-muted-foreground text-sm py-6 border-t border-border">
+        © 2025 ResumeCanvas. Open Source & Free.
+      </div>
     </div>
   );
 }

@@ -9,7 +9,7 @@ import { Trash2, Plus } from 'lucide-react';
 import { v4 as uuidv4 } from 'uuid';
 
 export default function EducationForm() {
-    const { resumeData, updateSection } = useResume();
+    const { resumeData, updateSection, setActiveItemId } = useResume();
     const { education } = resumeData;
 
     const addEducation = () => {
@@ -45,7 +45,12 @@ export default function EducationForm() {
     return (
         <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {education.map((edu, index) => (
-                <div key={edu.id} className="p-4 border border-border rounded-lg space-y-4">
+                <div
+                    key={edu.id}
+                    className="p-4 border border-border rounded-lg space-y-4 focus-within:border-primary/50 transition-colors"
+                    onClick={() => setActiveItemId(edu.id)}
+                    onFocus={() => setActiveItemId(edu.id)}
+                >
                     <div className="flex justify-between items-center">
                         <h3 className="font-medium">Education #{index + 1}</h3>
                         <Button

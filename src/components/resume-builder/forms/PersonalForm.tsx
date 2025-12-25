@@ -26,15 +26,21 @@ export default function PersonalForm() {
         if (!aiSummary) return;
         setEnhancing(true);
         try {
-            const res = await fetch('/api/ai/improve', {
+            // Use the centralized OpenRouter endpoint
+            const res = await fetch('/api/ai/suggest', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ text: aiSummary, section: 'summary' }),
+                body: JSON.stringify({
+                    userText: aiSummary,
+                    targetRole: resumeData.targetRole || 'Professional',
+                    currentSection: 'Summary',
+                    task: 'improve'
+                }),
             });
             if (!res.ok) throw new Error('AI request failed');
             const data = await res.json();
-            if (data.improvedText) {
-                updateSection('aiSummary', data.improvedText);
+            if (data.improved_text) {
+                updateSection('aiSummary', data.improved_text);
             }
         } catch (error) {
             console.error(error);

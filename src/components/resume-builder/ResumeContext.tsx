@@ -75,6 +75,8 @@ interface ResumeContextType {
     saveResume: () => Promise<void>;
     loading: boolean;
     isGuest: boolean;
+    activeItemId: string | null;
+    setActiveItemId: (id: string | null) => void;
 }
 
 const ResumeContext = createContext<ResumeContextType | undefined>(undefined);
@@ -112,6 +114,8 @@ export function ResumeProvider({ children, initialData, isGuest = false }: { chi
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
+    const [activeItemId, setActiveItemId] = useState<string | null>(null);
+
     const updateSection = (section: keyof ResumeData, data: any) => {
         setResumeData((prev) => {
             const newData = { ...prev, [section]: data };
@@ -123,14 +127,12 @@ export function ResumeProvider({ children, initialData, isGuest = false }: { chi
     };
 
     const saveResume = async () => {
+        // ... (existing save logic remains same)
         setLoading(true);
         try {
             if (isGuest) {
-                // In guest mode, 'save' just persists to local storage (already done on update, but maybe show success)
                 localStorage.setItem(GUEST_RESUME_KEY, JSON.stringify(resumeData));
-                // Simulate network delay
                 await new Promise(resolve => setTimeout(resolve, 500));
-                // Maybe redirect to a specific 'guest' view or just stay
                 return;
             }
 
@@ -158,7 +160,7 @@ export function ResumeProvider({ children, initialData, isGuest = false }: { chi
     };
 
     return (
-        <ResumeContext.Provider value={{ resumeData, setResumeData, updateSection, saveResume, loading, isGuest }}>
+        <ResumeContext.Provider value={{ resumeData, setResumeData, updateSection, saveResume, loading, isGuest, activeItemId, setActiveItemId }}>
             {children}
         </ResumeContext.Provider>
     );

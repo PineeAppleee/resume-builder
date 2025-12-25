@@ -14,8 +14,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ResumeCraft - Free Resume Builder with AI",
-  description: "Build professional resumes for free. No signup required to start.",
+  title: 'ResumeCanvas - AI-Guided Resume Builder',
+  description: 'A Gemini Canvas-like workspace for building professional resumes with real-time AI assistance.',
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({
