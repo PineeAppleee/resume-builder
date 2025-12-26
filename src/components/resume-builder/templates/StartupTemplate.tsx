@@ -1,9 +1,10 @@
 import React from 'react';
 import { ResumeData } from '@/components/resume-builder/ResumeContext';
+import { ResumePage } from '@/components/resume-builder/ResumePage';
 
 export const StartupTemplate = ({ data }: { data: ResumeData }) => {
     return (
-        <div className="font-sans text-slate-800 p-8 max-w-[210mm] min-h-[297mm] bg-white mx-auto">
+        <ResumePage className="font-sans text-slate-800 p-8 bg-white mx-auto">
             {/* Header */}
             <header className="mb-10">
                 <h1 className="text-5xl font-extrabold tracking-tight text-blue-600 mb-4">{data.personalInfo.fullName}</h1>
@@ -37,6 +38,24 @@ export const StartupTemplate = ({ data }: { data: ResumeData }) => {
                             ))}
                         </div>
                     </section>
+
+                    {data.projects && data.projects.length > 0 && (
+                        <section className="mb-10">
+                            <h2 className="text-2xl font-bold text-slate-900 mb-6">Built Projects</h2>
+                            <div className="space-y-6">
+                                {data.projects.map((proj, i) => (
+                                    <div key={i} className="bg-slate-50 p-4 rounded-lg border border-slate-100">
+                                        <div className="flex justify-between items-start mb-2">
+                                            <h3 className="text-lg font-bold text-slate-800">{proj.name}</h3>
+                                            {proj.link && <a href={proj.link} target="_blank" rel="noreferrer" className="text-xs text-blue-600 hover:underline">Link ↗</a>}
+                                        </div>
+                                        {proj.techStack && <div className="text-xs font-mono text-slate-500 mb-2">{proj.techStack}</div>}
+                                        <p className="text-sm text-slate-600">{proj.description}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    )}
                 </div>
 
                 {/* Sidebar */}
@@ -64,6 +83,6 @@ export const StartupTemplate = ({ data }: { data: ResumeData }) => {
                     </section>
                 </div>
             </div>
-        </div>
+        </ResumePage>
     );
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import { ResumeData } from '../ResumeContext';
+import { ResumePage } from '../ResumePage';
 
 interface TemplateProps {
     data: ResumeData;
@@ -9,7 +10,7 @@ export const CreativeTemplate: React.FC<TemplateProps> = ({ data }) => {
     const { personalInfo, education, skills, experience, projects, themeColor } = data;
 
     return (
-        <div className="w-full h-full bg-white text-slate-900 grid grid-cols-12 min-h-[297mm]">
+        <ResumePage className="bg-white text-slate-900 grid grid-cols-12">
             <div className="col-span-4 bg-slate-50 p-6 flex flex-col gap-6 border-r border-slate-200">
                 <div className="flex flex-col gap-1">
                     <div className="w-24 h-24 rounded-full bg-slate-200 mb-4 mx-auto overflow-hidden border-4 border-white shadow-md">
@@ -25,7 +26,7 @@ export const CreativeTemplate: React.FC<TemplateProps> = ({ data }) => {
                     {personalInfo.phone && <div>{personalInfo.phone}</div>}
                     {personalInfo.location && <div>{personalInfo.location}</div>}
                     {personalInfo.portfolio && (
-                        <a href={personalInfo.portfolio} className="text-blue-600 hover:underline block truncate">{personalInfo.portfolio}</a>
+                        <a href={personalInfo.portfolio} target="_blank" rel="noreferrer" className="text-blue-600 hover:underline block truncate">{personalInfo.portfolio}</a>
                     )}
                 </div>
 
@@ -48,8 +49,8 @@ export const CreativeTemplate: React.FC<TemplateProps> = ({ data }) => {
                     <section>
                         <h3 className="font-bold text-lg uppercase tracking-widest mb-4 text-center" style={{ color: themeColor }}>Education</h3>
                         <div className="space-y-4 text-center">
-                            {education.map((edu) => (
-                                <div key={edu.id}>
+                            {education.map((edu, i) => (
+                                <div key={i}>
                                     <div className="font-bold">{edu.school}</div>
                                     <div className="text-sm">{edu.degree}</div>
                                     <div className="text-xs text-slate-500 mt-1">{edu.startDate} - {edu.endDate}</div>
@@ -79,12 +80,12 @@ export const CreativeTemplate: React.FC<TemplateProps> = ({ data }) => {
                             Experimentation
                         </h2>
                         <div className="space-y-8 border-l-2 border-slate-100 pl-6 ml-2">
-                            {experience.map((exp) => (
-                                <div key={exp.id} className="relative">
+                            {experience.map((exp, i) => (
+                                <div key={i} className="relative break-inside-avoid">
                                     <div className="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-slate-200 border-2 border-white ring-1 ring-slate-100"></div>
                                     <h3 className="text-xl font-bold">{exp.role}</h3>
                                     <div className="text-slate-600 font-medium mb-2">{exp.company} | {exp.startDate} - {exp.endDate}</div>
-                                    <p className="text-slate-700 leading-relaxed text-sm">
+                                    <p className="text-slate-700 leading-relaxed text-sm text-justify">
                                         {exp.description}
                                     </p>
                                 </div>
@@ -98,20 +99,20 @@ export const CreativeTemplate: React.FC<TemplateProps> = ({ data }) => {
                     <section>
                         <h2 className="text-2xl font-bold uppercase mb-6">Selected Works</h2>
                         <div className="grid gap-6">
-                            {projects.map((project) => (
-                                <div key={project.id} className="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            {projects.map((project, i) => (
+                                <div key={i} className="bg-slate-50 p-4 rounded-xl border border-slate-100 break-inside-avoid">
                                     <div className="flex justify-between items-start mb-2">
                                         <h3 className="font-bold text-lg">{project.name}</h3>
-                                        {project.link && <a href={project.link} className="text-xs bg-slate-200 px-2 py-1 rounded hover:bg-slate-300 transition">View</a>}
+                                        {project.link && <a href={project.link} target="_blank" rel="noreferrer" className="text-xs bg-slate-200 px-2 py-1 rounded hover:bg-slate-300 transition">View</a>}
                                     </div>
                                     <p className="text-xs font-mono text-slate-500 mb-2">{project.techStack}</p>
-                                    <p className="text-sm text-slate-700">{project.description}</p>
+                                    <p className="text-sm text-slate-700 text-justify">{project.description}</p>
                                 </div>
                             ))}
                         </div>
                     </section>
                 )}
             </div>
-        </div>
+        </ResumePage>
     );
 };

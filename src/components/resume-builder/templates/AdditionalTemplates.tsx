@@ -1,8 +1,9 @@
 import React from 'react';
 import { ResumeData } from '@/components/resume-builder/ResumeContext';
+import { ResumePage } from '@/components/resume-builder/ResumePage';
 
 export const AcademicTemplate = ({ data }: { data: ResumeData }) => (
-    <div className="font-serif text-black p-12 max-w-[210mm] min-h-[297mm] bg-white mx-auto leading-normal">
+    <ResumePage className="font-serif text-black p-12 bg-white leading-normal">
         <header className="text-center mb-8">
             <h1 className="text-2xl font-bold mb-2">{data.personalInfo.fullName}</h1>
             <p className="text-sm">{data.personalInfo.location} | {data.personalInfo.email} | {data.personalInfo.phone}</p>
@@ -53,11 +54,11 @@ export const AcademicTemplate = ({ data }: { data: ResumeData }) => (
             <h2 className="font-bold uppercase text-sm border-b border-black mb-3">Skills</h2>
             <p className="text-sm">{data.skills.join(', ')}</p>
         </section>
-    </div>
+    </ResumePage>
 );
 
 export const CompactTemplate = ({ data }: { data: ResumeData }) => (
-    <div className="font-sans text-gray-800 p-6 max-w-[210mm] min-h-[297mm] bg-white mx-auto text-sm">
+    <ResumePage className="font-sans text-gray-800 p-6 bg-white text-sm">
         <header className="border-b-4 border-gray-800 pb-4 mb-4 flex justify-between items-end">
             <div>
                 <h1 className="text-3xl font-black uppercase tracking-tighter">{data.personalInfo.fullName}</h1>
@@ -99,12 +100,12 @@ export const CompactTemplate = ({ data }: { data: ResumeData }) => (
                 ))}
             </div>
         </div>
-    </div>
+    </ResumePage>
 );
 
 export const DesignerTemplate = ({ data }: { data: ResumeData }) => (
-    <div className="font-sans text-gray-900 p-0 max-w-[210mm] min-h-[297mm] bg-white mx-auto flex">
-        <aside className="w-1/3 bg-gray-900 text-white p-8 flex flex-col justify-between">
+    <ResumePage className="font-sans text-gray-900 p-0 bg-white flex">
+        <aside className="w-1/3 bg-gray-900 text-white p-8 flex flex-col justify-between h-full min-h-[297mm]">
             <div>
                 <h1 className="text-3xl font-bold leading-none mb-6 text-yellow-500">{data.personalInfo.fullName?.split(' ').map((n, i) => <div key={i}>{n}</div>)}</h1>
 
@@ -147,5 +148,5 @@ export const DesignerTemplate = ({ data }: { data: ResumeData }) => (
                 </div>
             </section>
         </main>
-    </div>
+    </ResumePage>
 );

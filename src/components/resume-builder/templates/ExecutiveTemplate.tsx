@@ -1,9 +1,10 @@
 import React from 'react';
 import { ResumeData } from '@/components/resume-builder/ResumeContext';
+import { ResumePage } from '@/components/resume-builder/ResumePage';
 
 export const ExecutiveTemplate = ({ data }: { data: ResumeData }) => {
     return (
-        <div className="font-serif text-gray-900 p-8 max-w-[210mm] min-h-[297mm] bg-white mx-auto leading-relaxed">
+        <ResumePage className="font-serif text-gray-900 p-8 bg-white mx-auto leading-relaxed">
             {/* Header */}
             <header className="border-b-2 border-gray-900 pb-6 mb-8 text-center">
                 <h1 className="text-4xl font-bold uppercase tracking-widest mb-2">{data.personalInfo.fullName}</h1>
@@ -41,6 +42,23 @@ export const ExecutiveTemplate = ({ data }: { data: ResumeData }) => {
                 </div>
             </section>
 
+            {/* Projects */}
+            {data.projects && data.projects.length > 0 && (
+                <section className="mb-8">
+                    <h2 className="text-lg font-bold uppercase border-b border-gray-300 mb-4 pb-1">Key Projects</h2>
+                    {data.projects.map((proj, i) => (
+                        <div key={i} className="mb-4 break-inside-avoid">
+                            <div className="flex justify-between items-baseline mb-1">
+                                <h3 className="font-bold text-lg">{proj.name}</h3>
+                                {proj.link && <a href={proj.link} target="_blank" rel="noreferrer" className="text-sm text-blue-800 underline">{proj.link}</a>}
+                            </div>
+                            {proj.techStack && <div className="text-sm italic mb-1 text-gray-600">Stack: {proj.techStack}</div>}
+                            <p className="whitespace-pre-line text-sm">{proj.description}</p>
+                        </div>
+                    ))}
+                </section>
+            )}
+
             {/* Education */}
             <section className="mb-8">
                 <h2 className="text-lg font-bold uppercase border-b border-gray-300 mb-4 pb-1">Education</h2>
@@ -64,6 +82,6 @@ export const ExecutiveTemplate = ({ data }: { data: ResumeData }) => {
                     ))}
                 </div>
             </section>
-        </div>
+        </ResumePage>
     );
 };

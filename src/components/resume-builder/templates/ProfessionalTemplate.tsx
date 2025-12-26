@@ -1,16 +1,17 @@
 import React from 'react';
 import { ResumeData } from '../ResumeContext';
+import { ResumePage } from '../ResumePage';
 
 export const ProfessionalTemplate = ({ data }: { data: ResumeData }) => {
     return (
-        <div className="h-full bg-white text-gray-800 p-8 font-sans" style={{ minHeight: '1000px' }}>
+        <ResumePage className="h-full bg-white text-gray-800 p-8 font-sans">
             {/* Header */}
             <header className="border-b-2 border-gray-800 pb-6 mb-8">
                 <h1 className="text-4xl font-bold uppercase tracking-wide text-gray-900">
                     {data.personalInfo.fullName || 'Your Name'}
                 </h1>
                 <div className="text-lg text-gray-600 mt-2 font-medium tracking-wider uppercase">
-                    {data.title || 'Professional Title'}
+                    {data.targetRole || 'Professional Title'}
                 </div>
 
                 <div className="flex flex-wrap gap-4 text-sm mt-4 text-gray-600">
@@ -50,7 +51,7 @@ export const ProfessionalTemplate = ({ data }: { data: ResumeData }) => {
                             <h2 className="text-xl font-bold uppercase border-b border-gray-300 pb-2 mb-3 text-gray-800">
                                 Professional Summary
                             </h2>
-                            <p className="text-gray-700 leading-relaxed text-sm">
+                            <p className="text-gray-700 leading-relaxed text-sm text-justify">
                                 {data.aiSummary}
                             </p>
                         </section>
@@ -62,16 +63,16 @@ export const ProfessionalTemplate = ({ data }: { data: ResumeData }) => {
                                 Work Experience
                             </h2>
                             <div className="space-y-6">
-                                {data.experience.map(exp => (
-                                    <div key={exp.id}>
+                                {data.experience.map((exp, i) => (
+                                    <div key={i} className="break-inside-avoid">
                                         <div className="flex justify-between items-baseline mb-1">
                                             <h3 className="font-bold text-gray-900 text-lg">{exp.role}</h3>
                                             <span className="text-sm font-medium text-gray-500 whitespace-nowrap">
                                                 {exp.startDate} – {exp.endDate}
                                             </span>
                                         </div>
-                                        <div className="text-primary font-medium mb-2">{exp.company}</div>
-                                        <p className="text-sm text-gray-700 whitespace-pre-line leading-relaxed">
+                                        <div className="text-blue-600 font-medium mb-2">{exp.company}</div>
+                                        <p className="text-sm text-gray-700 whitespace-pre-line leading-relaxed text-justify">
                                             {exp.description}
                                         </p>
                                     </div>
@@ -86,8 +87,8 @@ export const ProfessionalTemplate = ({ data }: { data: ResumeData }) => {
                                 Key Projects
                             </h2>
                             <div className="space-y-4">
-                                {data.projects.map(proj => (
-                                    <div key={proj.id}>
+                                {data.projects.map((proj, i) => (
+                                    <div key={i} className="break-inside-avoid">
                                         <div className="flex justify-between items-baseline">
                                             <h3 className="font-bold text-gray-900">{proj.name}</h3>
                                             {proj.link && (
@@ -97,7 +98,7 @@ export const ProfessionalTemplate = ({ data }: { data: ResumeData }) => {
                                             )}
                                         </div>
                                         <div className="text-xs text-gray-500 mb-1 font-mono">{proj.techStack}</div>
-                                        <p className="text-sm text-gray-700 leading-relaxed">
+                                        <p className="text-sm text-gray-700 leading-relaxed text-justify">
                                             {proj.description}
                                         </p>
                                     </div>
@@ -130,8 +131,8 @@ export const ProfessionalTemplate = ({ data }: { data: ResumeData }) => {
                                 Education
                             </h2>
                             <div className="space-y-4">
-                                {data.education.map(edu => (
-                                    <div key={edu.id}>
+                                {data.education.map((edu, i) => (
+                                    <div key={i} className="break-inside-avoid">
                                         <h3 className="font-bold text-gray-900 text-sm">{edu.school}</h3>
                                         <div className="text-sm text-gray-800">{edu.degree}</div>
                                         <div className="text-xs text-gray-500 mt-1">
@@ -144,6 +145,6 @@ export const ProfessionalTemplate = ({ data }: { data: ResumeData }) => {
                     )}
                 </div>
             </div>
-        </div>
+        </ResumePage>
     );
 };
