@@ -35,6 +35,20 @@ export const AcademicTemplate = ({ data }: { data: ResumeData }) => (
             ))}
         </section>
 
+        <section className="mb-6">
+            <h2 className="font-bold uppercase text-sm border-b border-black mb-3">Projects</h2>
+            {data.projects.map((proj, i) => (
+                <div key={i} className="mb-4">
+                    <div className="flex justify-between font-bold text-sm">
+                        <span>{proj.name}</span>
+                        {proj.link && <a href={proj.link} target="_blank" rel="noreferrer" className="font-normal underline text-blue-800">{proj.link}</a>}
+                    </div>
+                    {proj.techStack && <div className="text-xs italic mb-1 text-gray-700">Stack: {proj.techStack}</div>}
+                    <p className="text-sm text-justify">{proj.description}</p>
+                </div>
+            ))}
+        </section>
+
         <section>
             <h2 className="font-bold uppercase text-sm border-b border-black mb-3">Skills</h2>
             <p className="text-sm">{data.skills.join(', ')}</p>
